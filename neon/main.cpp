@@ -16,20 +16,20 @@ void main()
 
 		int counter = 0;
 
-		int max_length = 0;
-		list<string> sequence;
-		string max_command;
+		//list<string> sequence;
+		int max_length = 0, count_in_current_sequence = 1;
+		string max_command, prev_command;
 		while (!fin.eof())//eof - end of file
 		{
 			counter++;
 			command.clear();
 			fin >> command >> letter;
-			sequence.push_front(command);
+			/*sequence.push_front(command);
 			if (sequence.size() > 1)
 			{
 				//list<string>::iterator it = sequence.begin();
 				//it++;
-				if (sequence.front() == sequence.back()/* && sequence.size() >= max_length*/)
+				if (sequence.front() == sequence.back())
 				{
 					if (sequence.size()>=max_length)
 					{
@@ -42,7 +42,23 @@ void main()
 					sequence.clear();
 					sequence.push_front(command);
 				}
+			}*/
+
+			if (command == prev_command)
+			{
+				count_in_current_sequence++;
+				if (count_in_current_sequence >= max_length)
+				{
+					max_length = count_in_current_sequence;
+					max_command = command;
+				}
 			}
+			else
+			{
+				count_in_current_sequence = 1;
+				prev_command = command;
+			}
+
 			if (command == "DOPISZ")
 			{
 				result.push_back(letter);
